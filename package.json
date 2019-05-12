@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www"
+    "start": "node .src/bin/www",
+    "server": "babel-node ./src/bin/www",
+    "dev": "nodemon src/bin/www --exec babel-node --presets @babel/preset-env"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -12,7 +13,16 @@
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
+    "moment": "^2.24.0",
     "morgan": "~1.9.1",
+    "npm-run-all": "^4.1.5",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.4.4",
     "nodemon": "^1.19.0"
   }
 }
