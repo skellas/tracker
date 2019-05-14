@@ -17,11 +17,30 @@
     <% } %>
     </div>
     <div class="col-sm-8 text-left"> 
-      <h1>Welcome</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <hr>
-      <h3>Test</h3>
-      <p>Lorem ipsum...</p>
+      <form>
+        <div class="form-group">
+          <label for="trackerName">Name</label>
+          <input type="text" class="form-control" id="trackerName"
+            aria-describedby="trackerNameHelp" placeholder="Enter Name">
+          <small id="trackerNameHelp" class="form-text text-muted">
+            A useful name for the tracker.
+          </small>
+        </div>
+        <div class="form-group">
+          <label for="trackerDescription">Description</label>
+          <textarea class="form-control" id="trackerDescription" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="trackerScale">Weight Scale</label>
+          <select class="form-control" id="trackerScale">
+            <option value="5ptGradient">5 Point Gradient</option>
+            <option value="3ptGradient">3 Point Gradient</option>
+            <option value="0to10">0 to 10</option>
+          </select>
+        </div>
+        <button type="update" class="btn btn-primary">Update</button>
+        <button type="delete" class="btn btn-tertiary">Delete</button>
+      </form>
     </div>
     <div class="col-sm-2 sidenav">
       <div class="well">
