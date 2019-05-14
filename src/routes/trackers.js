@@ -2,7 +2,7 @@
 import express from 'express';
 var router = express.Router();
 
-import trackersService from '../services/trackers';
+import {tracker} from '../services/trackers';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
   { 
       title: 'Tracked Items',
       trackersActive: true, 
-      trackers: trackersService.findAll()
+      trackers: tracker.findAll()
   }
 );
 });

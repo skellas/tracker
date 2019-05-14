@@ -7,17 +7,17 @@ class TrackersService {
     }
 
     findAll() {
-        this.loadTrackers();
+        if (this.trackers.length === 0) {
+            this.loadTrackers();
+        }
         return this.trackers;
     }
 
     loadTrackers() {
-        
-        fs.readFile(path.join(__dirname, '../../data/trackers.json'), function(err, data) {
-            if (err) throw err;
-            this.trackers = JSON.parse(data);
-        });
+        console.log("loading");
+        let data = fs.readFileSync(path.join(__dirname, '../../data/trackers.json')).toString();
+        this.trackers = JSON.parse(data);
     }
 }
 
-export default new TrackersService();
+export let tracker = new TrackersService();
