@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-class TrackersService {
+export class TrackersService {
     constructor() {
         this.trackers = [];
     }
@@ -13,11 +13,12 @@ class TrackersService {
         return this.trackers;
     }
 
+    find(id) {
+        return this.trackers.filter(tracker => tracker.id == id)[0];
+    }
+
     loadTrackers() {
-        console.log("loading");
         let data = fs.readFileSync(path.join(__dirname, '../../data/trackers.json')).toString();
         this.trackers = JSON.parse(data);
     }
 }
-
-export let tracker = new TrackersService();

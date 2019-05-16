@@ -2,11 +2,13 @@
     {
         "id": 1,
         "name": "Tracker Uno",
-        "description": "Quick Description"
+        "description": "Quick Description",
+        "scale": "5ptGradient"
     },
     {
         "id": 2,
         "name": "Tracker Duo",
-        "description": "Another Description, slightly longer though"
+        "description": "Another Description, slightly longer though",
+        "scale": "3ptGradient"
     }
 ]
