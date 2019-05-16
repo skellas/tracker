@@ -1,0 +1,5 @@
+{
+    "exec": "nodemon src/bin/www --exec babel-node --presets @babel/preset-env",
+    "watch": ["src/*", "public/*"],
+    "ext": "js, html, css, json, ejs"
+  }

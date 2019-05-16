@@ -3,6 +3,7 @@
 <head>
   <title><%= title %></title>
   <%- include('../partials/head'); -%>
+  <script src='/javascripts/trackers/controller/trackersController.js'></script>
 </head>
 <body>
 
@@ -13,7 +14,7 @@
     <div class="col-sm-2 sidenav">
     
     <% for (let tracker of trackers) { %>
-      <p><a href="#"><%= tracker.name %></a></p>
+      <p><a data-id="<%= tracker.id %>" href="#"><%= tracker.name %></a></p>
     <% } %>
     </div>
     <div class="col-sm-8 text-left"> 
@@ -54,6 +55,8 @@
 </div>
 
 <%- include('../partials/footer'); -%>
-
+<script type='text/javascript'>
+  new TrackersController().init();
+</script>
 </body>
 </html>
