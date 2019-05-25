@@ -22,4 +22,10 @@ router.get('/:id', function(req, res) {
   res.json(trackerService.find(req.params.id));
 });
 
+/* PUT individual tracker. */
+router.put('/:id', function(req, res) {
+  trackerService.update(req.params.id, req.body);
+  res.status(200);
+});
+
 export default router;

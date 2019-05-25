@@ -20,6 +20,7 @@
     <div class="col-sm-8 text-left"> 
       <form>
         <div class="form-group">
+          <input type="hidden" id="trackerId" value=""/>
           <label for="trackerName">Name</label>
           <input type="text" class="form-control" id="trackerName"
             aria-describedby="trackerNameHelp" placeholder="Enter Name">
@@ -39,8 +40,8 @@
             <option value="0to10">0 to 10</option>
           </select>
         </div>
-        <button type="update" class="btn btn-primary">Update</button>
-        <button type="delete" class="btn btn-tertiary">Delete</button>
+        <button id="update" type="button" class="btn btn-primary">Update</button>
+        <button id="button" type="button" class="btn btn-tertiary">Delete</button>
       </form>
     </div>
     <div class="col-sm-2 sidenav">
@@ -66,6 +67,7 @@
         dataType: "json",
         success: function(data) {
           console.log(data);
+          $('#trackerId').val(data.id);
           $('#trackerName').val(data.name);
           $('#trackerDescription').val(data.description);
           $('#trackerScale').val(data.scale);
