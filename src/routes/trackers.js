@@ -24,8 +24,7 @@ router.get('/:id', function(req, res) {
 
 /* PUT individual tracker. */
 router.put('/:id', function(req, res) {
-  trackerService.update(req.params.id, req.body);
-  res.status(200);
+  res.json(trackerService.update(req.params.id, req.body));
 });
 
 export default router;

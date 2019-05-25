@@ -14,15 +14,28 @@ export class TrackersService {
     }
 
     find(id) {
-        return this.trackers.filter(tracker => tracker.id == id)[0];
+        console.log('looking for id: ' + id);
+        return this.trackers.find(tracker => tracker.id == id);
     }
 
     update(id, updatedTracker) {
-        console.log(updatedTracker);
-        let localTracker = this.trackers.filter(tracker => tracker.id == id)[0];
-        localTracker = updatedTracker;
+        this.remove(id);
+        console.log(this.trackers);
+        this.add(updatedTracker);
+        return this.find(id);
     }
 
+    add(tracker) {
+        if (!tracker.id) {
+            tracker.id = this.trackers.length + 1;
+        }
+        this.trackers.push(tracker);
+    }
+
+    remove(id) {
+        console.log('removing by id: ' + id);
+        this.trackers.splice([this.trackers.findIndex(tracker => tracker.id == id)], 1);
+    }
     loadTrackers() {
         let data = fs.readFileSync(path.join(__dirname, '../../data/trackers.json')).toString();
         this.trackers = JSON.parse(data);

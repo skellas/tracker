@@ -18,11 +18,11 @@
       </div>
     </div>
     <div class="col-sm-8 text-left"> 
-      <form>
+      <form id="trackerForm">
         <div class="form-group">
-          <input type="hidden" id="trackerId" value=""/>
+          <input type="hidden" id="trackerId" name="id" value=""/>
           <label for="trackerName">Name</label>
-          <input type="text" class="form-control" id="trackerName"
+          <input type="text" class="form-control" id="trackerName" name="name"
             aria-describedby="trackerNameHelp" placeholder="Enter Name">
           <small id="trackerNameHelp" class="form-text text-muted">
             A useful name for the tracker.
@@ -30,11 +30,11 @@
         </div>
         <div class="form-group">
           <label for="trackerDescription">Description</label>
-          <textarea class="form-control" id="trackerDescription" rows="3"></textarea>
+          <textarea class="form-control" id="trackerDescription" name="description" rows="3"></textarea>
         </div>
         <div class="form-group">
           <label for="trackerScale">Weight Scale</label>
-          <select class="form-control" id="trackerScale">
+          <select class="form-control" id="trackerScale" name="scale">
             <option value="5ptGradient">5 Point Gradient</option>
             <option value="3ptGradient">3 Point Gradient</option>
             <option value="0to10">0 to 10</option>
@@ -58,6 +58,16 @@
 <%- include('../partials/footer'); -%>
 <script type='text/javascript'>
   $(document).ready(function(){
+    $('button#update').on('click', function(event) {
+      data = $('#trackerForm').serializeArray();
+      $.ajax({
+        url: "/trackers/"+data[0].value,
+        type: 'PUT',
+        dataType: "json",
+        data: data
+      });
+    });
+
     $('a.tracker').on('click', function (event) {
       console.log('clicked ' + $(this).data('id'));
 
@@ -66,7 +76,6 @@
         type: 'GET',
         dataType: "json",
         success: function(data) {
-          console.log(data);
           $('#trackerId').val(data.id);
           $('#trackerName').val(data.name);
           $('#trackerDescription').val(data.description);
