@@ -26,10 +26,13 @@ export class TrackersService {
     }
 
     add(tracker) {
-        if (!tracker.id) {
+        if (!tracker.id || tracker.id === '') {
             tracker.id = this.trackers.length + 1;
         }
+        console.log("adding ")
+        console.log(tracker);
         this.trackers.push(tracker);
+        return tracker;
     }
 
     remove(id) {

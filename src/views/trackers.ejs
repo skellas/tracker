@@ -12,9 +12,15 @@
   <div class="row content">
     <div class="col-sm-2 sidenav">
       <div id="trackerMenu">
+        <span>
       <% for (let tracker of trackers) { %>
-        <p><a class="tracker" data-id="<%= tracker.id %>" href="#"><%= tracker.name %></a></p>
+          <p><a class="tracker" data-id="<%= tracker.id %>" href="#"><%= tracker.name %></a></p>
       <% } %>
+        </span>
+        <div id="newTracker">
+          <hr/>
+          <p><a class="new-tracker" href="#">Add New Tracker</a></p>
+        </div>
       </div>
     </div>
     <div class="col-sm-8 text-left"> 
@@ -40,7 +46,8 @@
             <option value="0to10">0 to 10</option>
           </select>
         </div>
-        <button id="update" type="button" class="btn btn-primary">Update</button>
+        <button id="create" type="button" class="btn btn-primary">Create</button>
+        <button id="update" type="button" class="btn btn-primary" style="display: none">Update</button>
         <button id="button" type="button" class="btn btn-tertiary">Delete</button>
       </form>
     </div>
@@ -58,6 +65,10 @@
 <%- include('../partials/footer'); -%>
 <script type='text/javascript'>
   $(document).ready(function(){
+    $('#trackerId').on('change', function() {
+      $('button#create').hide();
+      $('button#update').show();
+    });
     $('button#update').on('click', function(event) {
       data = $('#trackerForm').serializeArray();
       $.ajax({
@@ -67,16 +78,39 @@
         data: data
       });
     });
+    $('button#create').on('click', function(event) {
+      $.ajax({
+        url: "/trackers/",
+        type: 'POST',
+        dataType: "json",
+        data: $('#trackerForm').serializeArray(),
+        success: function(data) {
+          console.log(data);
+          $('#trackerMenu span').append(`
+            <p><a class="tracker" data-id="${data.id}" href="#">${data.name}</a></p>
+          `);
+          // TODO: Need to rebind
+        }
+      });
+    });
+
+    $('a.new-tracker').on('click', function() {
+      $('#trackerId').val(null);
+      $('#trackerName').val('');
+      $('#trackerDescription').val('');
+      $('#trackerScale').val('');
+
+      $('button#create').show();
+      $('button#update').hide();
+    });
 
     $('a.tracker').on('click', function (event) {
-      console.log('clicked ' + $(this).data('id'));
-
       $.ajax({
         url: "/trackers/"+$(this).data('id'),
         type: 'GET',
         dataType: "json",
         success: function(data) {
-          $('#trackerId').val(data.id);
+          $('#trackerId').val(data.id).trigger('change');
           $('#trackerName').val(data.name);
           $('#trackerDescription').val(data.description);
           $('#trackerScale').val(data.scale);
