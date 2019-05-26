@@ -3,8 +3,8 @@
 <head>
   <title><%= title %></title>
   <%- include('../partials/head'); -%>
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
-  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.css">
+  <script src="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.js"></script>
 </head>
 <body>
 
@@ -54,9 +54,19 @@
           <button id="delete" type="button" class="btn btn-tertiary" style="display: none">Delete</button>
         </form>
       </div>
-      <div id="entries" class="p-4 border">
-        <table id="dataTable">
+      <div id="entries">
+        <span>&nbsp;</span>
+        <table id="entriesTable" data-toggle="table" style="display: none">
+          <thead>
+            <tr>
+              <th data-field="id">ID</th>
+              <th data-field="date">Entry Date</th>
+              <th data-field="note">Note</th>
+              <th data-field="grade">Grade</th>
+            </tr>
+          </thead>
         </table>
+        <span>&nbsp;</span>
       </div>
     </div>
     <div class="col-sm-2 sidenav">

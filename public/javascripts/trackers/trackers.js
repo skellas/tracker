@@ -74,4 +74,5 @@ function clearValues() {
     $('#trackerName').val('');
     $('#trackerDescription').val('');
     $('#trackerScale').val('');
+    $('#entriesTable').hide();
 }
