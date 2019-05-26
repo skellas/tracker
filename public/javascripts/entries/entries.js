@@ -1,6 +1,7 @@
     function loadDataTable(data) {
+        console.log(data);
         $('#dataTable').DataTable( {
-            data: data,
+           // data: data,
             retrieve: true,
             columns: [
                 { data: 'id' },
@@ -8,7 +9,7 @@
                 { data: 'note' },
                 { data: 'grade' }                
             ]
-        });
+        }).clear().rows.add(data).draw();
     }
 
     function getEntries(trackerId) {
