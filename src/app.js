@@ -2,6 +2,7 @@
 import express from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
+import createError from 'http-errors';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
 import indexRouter from './routes/index';

@@ -12,4 +12,11 @@ router.get('/', function(req, res, next) {
   );
 });
 
+/* GET bootstrap4 templated page. */
+router.get('/bootstrap', function(req, res, next) {
+  res.render('bootstrap4', 
+    {}
+  );
+});
+
 export default router;

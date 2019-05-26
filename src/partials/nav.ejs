@@ -1,22 +1,22 @@
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>                        
-        </button>
-        <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-dashboard"></span></a>
-      </div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav">
-          <li class="<% if (locals.indexActive) { %>active<%}%>"><a href="/">Home</a></li>
-          <li class="<% if (locals.trackersActive) { %>active<%}%>"><a href="/trackers">Trackers</a></li>
-          <li class="<% if (locals.aboutActive) { %>active<%}%>"><a href="#">About</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right invisible">
-          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-        </ul>
-      </div>
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+      
+        <li class="nav-item <% if (locals.indexActive) { %>active<%}%>">
+          <a class="nav-link" href="/">Home<% if (locals.indexActive) { %><span class="sr-only">(current)</span><%}%></a>
+        </li>
+        <li class="nav-item <% if (locals.trackersActive) { %>active<%}%>">
+          <a class="nav-link" href="/trackers">Trackers<% if (locals.indexActive) { %><span class="sr-only">(current)</span><%}%></a>
+        </li>
+        <li class="nav-item <% if (locals.aboutActive) { %>active<%}%>">
+          <a class="nav-link" href="/about">About<% if (locals.indexActive) { %><span class="sr-only">(current)</span><%}%></a>
+        </li>
+      </ul>
     </div>
   </nav>
+</header>
