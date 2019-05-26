@@ -17,19 +17,24 @@ router.get('/', function(req, res, next) {
   );
 });
 
-/* GET individual tracker. */
+/* GET: find an individual tracker. */
 router.get('/:id', function(req, res) {
   res.json(trackerService.find(req.params.id));
 });
 
-/* PUT individual tracker. */
+/* PUT: update an existing tracker. */
 router.put('/:id', function(req, res) {
   res.json(trackerService.update(req.params.id, req.body));
 });
 
-/* POST new tracker. */
+/* POST: create a new tracker. */
 router.post('/', function(req, res) {
   res.json(trackerService.add(req.body));
+});
+
+/* DELETE: an existing tracker. */
+router.delete('/:id', function(req, res) {
+  res.json(trackerService.remove(req.params.id));
 });
 
 export default router;

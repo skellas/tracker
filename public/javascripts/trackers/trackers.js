@@ -4,6 +4,18 @@ $(function(){
         $('button#create').hide();
         $('button#update').show();
     });
+    $('button#delete').on('click', function(event) {
+        data = $('#trackerForm').serializeArray();
+        $.ajax({
+        url: "/trackers/"+data[0].value,
+        type: 'DELETE',
+        dataType: "json",
+        success: function(data) {
+            console.log(data);
+            $(`#trackerMenu a[data-id='${data}']`).remove();
+        }
+        });
+    });
     $('button#update').on('click', function(event) {
         data = $('#trackerForm').serializeArray();
         $.ajax({

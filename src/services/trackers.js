@@ -38,6 +38,7 @@ export class TrackersService {
     remove(id) {
         console.log('removing by id: ' + id);
         this.trackers.splice([this.trackers.findIndex(tracker => tracker.id == id)], 1);
+        return id;
     }
     loadTrackers() {
         let data = fs.readFileSync(path.join(__dirname, '../../data/trackers.json')).toString();
