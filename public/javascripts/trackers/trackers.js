@@ -11,8 +11,8 @@ $(function(){
         type: 'DELETE',
         dataType: "json",
         success: function(data) {
-            console.log(data);
             $(`#trackerMenu a[data-id='${data}']`).remove();
+            clearValues();
         }
         });
     });
@@ -32,7 +32,6 @@ $(function(){
         dataType: "json",
         data: $('#trackerForm').serializeArray(),
         success: function(data) {
-            console.log(data);
             $('#trackerMenu span').append(`
             <p><a class="tracker" data-id="${data.id}" href="#">${data.name}</a></p>
             `);
@@ -43,11 +42,7 @@ $(function(){
 
     // Tracker Menu Management
     $('a.new-tracker').on('click', function() {
-        $('#trackerId').val(null);
-        $('#trackerName').val('');
-        $('#trackerDescription').val('');
-        $('#trackerScale').val('');
-
+        clearValues();
         $('button#create').show();
         $('button#update').hide();
     });
@@ -65,4 +60,11 @@ $(function(){
         }
         });
     });
+
+    function clearValues() {
+        $('#trackerId').val(null);
+        $('#trackerName').val('');
+        $('#trackerDescription').val('');
+        $('#trackerScale').val('');
+    }
   });
