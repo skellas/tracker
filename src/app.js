@@ -6,6 +6,7 @@ import bodyParser from 'body-parser';
 import logger from 'morgan';
 import indexRouter from './routes/index';
 import trackersRouter from './routes/trackers';
+import entriesRouter from './routes/entries';
 
 const app = express();
 app.use(logger('dev'));
@@ -17,6 +18,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 app.use('/', indexRouter);
 app.use('/trackers', trackersRouter);
+app.use('/entries', entriesRouter);
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

@@ -1,0 +1,14 @@
+[
+    {
+        "id": "1",
+        "date": "05/24/2019",
+        "note": "Read three chapters",
+        "grade": "+1"
+    },
+    {
+        "id": "2",
+        "date": "05/26/2019",
+        "note": "Read an article",
+        "grade": "0"
+    }
+]

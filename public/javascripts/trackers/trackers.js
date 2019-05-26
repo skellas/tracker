@@ -51,24 +51,27 @@ $(function(){
     });
     $('a.tracker').on('click', getTrackerDetails);
 
-    function getTrackerDetails(event) {event.preventDefault();
-        $.ajax({
-        url: "/trackers/"+$(this).data('id'),
-        type: 'GET',
-        dataType: "json",
-        success: function(data) {
-            $('#trackerId').val(data.id).trigger('change');
-            $('#trackerName').val(data.name);
-            $('#trackerDescription').val(data.description);
-            $('#trackerScale').val(data.scale);
-        }
-        });
-    }
-
-    function clearValues() {
-        $('#trackerId').val(null);
-        $('#trackerName').val('');
-        $('#trackerDescription').val('');
-        $('#trackerScale').val('');
-    }
   });
+  
+  function getTrackerDetails(event) {event.preventDefault();
+    $.ajax({
+    url: "/trackers/"+$(this).data('id'),
+    type: 'GET',
+    dataType: "json",
+    success: function(data) {
+        $('#trackerId').val(data.id).trigger('change');
+        $('#trackerName').val(data.name);
+        $('#trackerDescription').val(data.description);
+        $('#trackerScale').val(data.scale);
+
+        getEntries(data.id);
+        }
+    });
+}
+
+function clearValues() {
+    $('#trackerId').val(null);
+    $('#trackerName').val('');
+    $('#trackerDescription').val('');
+    $('#trackerScale').val('');
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title><%= title %></title>
+  <%- include('../partials/head'); -%>
+</head>
+<body>
+
+<%- include('../partials/nav'); -%>
+  
+<div class="container-fluid text-center">    
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+      <p>&nbsp;</p>
+    </div>
+    <div class="col-sm-8 text-left"> 
+      <h1>Tracker Project</h1>
+      <p>
+        This is the tracker project. Basically, I want a way to track certain things.
+        And I want a playground in which to do a bit of javascript and nodejs work.
+      </p>
+      <p>
+        Be forewarned, my html and css... and js are not what you might call... good.
+        So, bare with me as I figure out how to move from super strict Java land into 
+        devil may care frontier world of Javascript.
+        Maybe I'll bring in TypeScript to make things a bit more rigid for me, but we'll
+        see. No need for it yet, trying to stay as light as possible until I need more
+        complexity.
+      </p>
+      <hr>
+      <h3>Goals</h3>
+      <p>Create a Tracker Object</p>
+      <p>Give that Tracker some barebone properties</p>
+      <p>Add Tracked Items to that Tracker Object</p>
+      <p>The Tracked Items will have a date and a score</p>
+      <p>Build reports based on data over time for these Trackers</p>
+    </div>
+    <div class="col-sm-2 sidenav">
+      <div class="well">
+        <p>ADS</p>
+      </div>
+      <div class="well">
+        <p>ADS</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer'); -%>
+
+</body>
+</html>
