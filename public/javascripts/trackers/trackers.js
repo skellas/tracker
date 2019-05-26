@@ -1,8 +1,10 @@
 $(function(){
+
     // Button Management
     $('#trackerId').on('change', function() {
         $('button#create').hide();
         $('button#update').show();
+        $('button#delete').show();
     });
     $('button#delete').on('click', function(event) {
         data = $('#trackerForm').serializeArray();
@@ -35,7 +37,7 @@ $(function(){
             $('#trackerMenu span').append(`
             <p><a class="tracker" data-id="${data.id}" href="#">${data.name}</a></p>
             `);
-            // TODO: Need to rebind
+            $(`#trackerMenu a[data-id='${data.id}']`).bind('click', getTrackerDetails);
         }
         });
     });
@@ -45,9 +47,11 @@ $(function(){
         clearValues();
         $('button#create').show();
         $('button#update').hide();
+        $('button#delete').hide();
     });
-    $('a.tracker').on('click', function (event) {
-        event.preventDefault();
+    $('a.tracker').on('click', getTrackerDetails);
+
+    function getTrackerDetails(event) {event.preventDefault();
         $.ajax({
         url: "/trackers/"+$(this).data('id'),
         type: 'GET',
@@ -59,7 +63,7 @@ $(function(){
             $('#trackerScale').val(data.scale);
         }
         });
-    });
+    }
 
     function clearValues() {
         $('#trackerId').val(null);
