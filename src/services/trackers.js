@@ -1,9 +1,12 @@
 import fs from 'fs';
 import path from 'path';
 
+import { ESData } from './data';
+
 export class TrackersService {
     constructor() {
         this.trackers = [];
+        this.loader = new ESData();
     }
 
     findAll() {
@@ -16,6 +19,28 @@ export class TrackersService {
     find(id) {
         console.log('looking for id: ' + id);
         return this.trackers.find(tracker => tracker.id == id);
+    }
+
+    findAsync(id) {
+        console.log('looking for id: ' + id);
+        return this.loader.search('trackers', this.matchById(id))
+                          .then(searchResponse => {
+                              return searchResponse.hits.hits[0]._source;
+                          });
+    }
+
+    matchById(id) {
+        return {
+            size: 1,
+            from: 0,
+            query: {
+                match: {
+                    id: {
+                        query: `${id}`
+                    }
+                }
+            }
+        };
     }
 
     update(id, updatedTracker) {
@@ -43,5 +68,6 @@ export class TrackersService {
     loadTrackers() {
         let data = fs.readFileSync(path.join(__dirname, '../../data/trackers.json')).toString();
         this.trackers = JSON.parse(data);
+        this.loader.bulkIndex('trackers', 'tracker', this.trackers);
     }
 }
