@@ -3,13 +3,6 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "npm run prod",
-    "server": "babel-node ./src/bin/www",
-    "server:prod": "node ./dist/bin/www",
-    "dev": "SET NODE_ENV=development npm-run-all server",
-    "clean": "rimraf dist",
-    "build": "babel ./src --copy-files --out-dir dist",
-    "prod": "SET NODE_ENV=production npm-run-all clean build server:prod",
     "watch": "nodemon"
   },
   "dependencies": {
@@ -18,7 +11,7 @@
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "ejs": "~2.6.1",
-    "elasticsearch": "^16.0.0",
+    "elasticsearch": "^16.1.0",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "moment": "^2.24.0",
