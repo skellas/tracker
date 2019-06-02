@@ -8,13 +8,15 @@ const trackerService = new TrackersService();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('trackers',
-    { 
-        title: 'Tracked Items',
-        trackersActive: true, 
-        trackers: trackerService.findAll()
-    }
-  );
+  trackerService.findAll().then(trackerResults => {
+    res.render('trackers',
+      { 
+          title: 'Tracked Items',
+          trackersActive: true, 
+          trackers: trackerResults
+      }
+    );
+  });
 });
 
 /* GET: find an individual tracker. */

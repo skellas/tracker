@@ -1,5 +1,32 @@
 import {Client} from 'elasticsearch';
 
+const maxPageSize = 5;
+export class ESQuery {
+    matchById(id) {
+        return {
+            size: 1,
+            from: 0,
+            query: {
+                match: {
+                    id: {
+                        query: `${id}`
+                    }
+                }
+            }
+        };
+    }
+    
+    findAll() {
+        return {
+            size: maxPageSize,
+            from: 0,
+            query: {
+                match_all: {}
+            }
+        };
+    }
+}
+
 export class ESData {
     constructor() {
         this.esClient = new Client(

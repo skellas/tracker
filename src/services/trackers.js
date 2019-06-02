@@ -1,5 +1,6 @@
-import { ESData } from './data';
+import { ESData, ESQuery } from './data';
 
+const queries = new ESQuery();
 export class TrackersService {
     constructor() {
         this.trackers = [];
@@ -7,10 +8,12 @@ export class TrackersService {
     }
 
     findAll() {
-        if (this.trackers.length === 0) {
-            this.loadTrackers();
-        }
-        return this.trackers;
+        console.log('find all trackers');
+        return this.loader.search('trackers', queries.findAll())
+                          .then(searchResponse => {
+                              console.log(searchResponse.hits.hits);
+                              return searchResponse.hits.hits.map((hit)=> hit._source);
+                          });
     }
 
     find(id) {
@@ -20,24 +23,10 @@ export class TrackersService {
 
     findAsync(id) {
         console.log('looking for id: ' + id);
-        return this.loader.search('trackers', this.matchById(id))
+        return this.loader.search('trackers', queries.matchById(id))
                           .then(searchResponse => {
                               return searchResponse.hits.hits[0]._source;
                           });
-    }
-
-    matchById(id) {
-        return {
-            size: 1,
-            from: 0,
-            query: {
-                match: {
-                    id: {
-                        query: `${id}`
-                    }
-                }
-            }
-        };
     }
 
     update(id, updatedTracker) {
