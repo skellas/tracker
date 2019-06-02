@@ -1,6 +1,3 @@
-import fs from 'fs';
-import path from 'path';
-
 import { ESData } from './data';
 
 export class TrackersService {
@@ -54,7 +51,7 @@ export class TrackersService {
         if (!tracker.id || tracker.id === '') {
             tracker.id = this.trackers.length + 1;
         }
-        console.log("adding ")
+        console.log("adding ");
         console.log(tracker);
         this.trackers.push(tracker);
         return tracker;
@@ -64,10 +61,5 @@ export class TrackersService {
         console.log('removing by id: ' + id);
         this.trackers.splice([this.trackers.findIndex(tracker => tracker.id == id)], 1);
         return id;
-    }
-    loadTrackers() {
-        let data = fs.readFileSync(path.join(__dirname, '../../data/trackers.json')).toString();
-        this.trackers = JSON.parse(data);
-        this.loader.bulkIndex('trackers', 'tracker', this.trackers);
     }
 }

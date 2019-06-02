@@ -8,7 +8,6 @@ import logger from 'morgan';
 import indexRouter from './routes/index';
 import trackersRouter from './routes/trackers';
 import entriesRouter from './routes/entries';
-import DataLoader from './services/data';
 
 const app = express();
 app.use(logger('dev'));

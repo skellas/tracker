@@ -38,14 +38,18 @@ export class ESData {
             bulkBody.push(item);
         });
 
-        this.esClient.bulk({body: bulkBody})
+        return this.esClient.bulk({body: bulkBody})
                      .then(response => {
                          let errorCount = 0;
+                         let results = [];
                          response.items.forEach(item => {
                              if (item.index && item.index.error) {
                                  console.log(++errorCount, item.index.error);
+                             } else {
+                                 results.push(item);
                              }
                          });
+                         return results;
                      })
                      .catch(console.err);
     }

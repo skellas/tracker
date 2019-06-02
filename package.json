@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "watch": "nodemon"
+    "watch": "nodemon",
+    "load": "babel-node --presets @babel/preset-env src/loadData.js"
   },
   "dependencies": {
     "@elastic/elasticsearch": "^7.1.0",
