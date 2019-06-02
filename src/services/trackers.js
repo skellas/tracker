@@ -18,11 +18,6 @@ export class TrackersService {
 
     find(id) {
         console.log('looking for id: ' + id);
-        return this.trackers.find(tracker => tracker.id == id);
-    }
-
-    findAsync(id) {
-        console.log('looking for id: ' + id);
         return this.loader.search('trackers', queries.matchById(id))
                           .then(searchResponse => {
                               return searchResponse.hits.hits[0]._source;

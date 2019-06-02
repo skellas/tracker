@@ -21,7 +21,7 @@ router.get('/', function(req, res, next) {
 
 /* GET: find an individual tracker. */
 router.get('/:id', function(req, res) {
-  trackerService.findAsync(req.params.id)
+  trackerService.find(req.params.id)
                 .then(result => res.json(result));
 });
 
