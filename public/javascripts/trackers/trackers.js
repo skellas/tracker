@@ -1,10 +1,21 @@
 $(function(){
 
+    function manageButtonState(trackerSelected) {
+        if (trackerSelected) {
+            $('button#create').hide();
+            $('button#update').show();
+            $('button#delete').show();
+        }
+        else {
+            $('button#create').show();
+            $('button#update').hide();
+            $('button#delete').hide();
+        }
+    }
+
     // Button Management
     $('#trackerId').on('change', function() {
-        $('button#create').hide();
-        $('button#update').show();
-        $('button#delete').show();
+        manageButtonState(true);
     });
     $('button#delete').on('click', function(event) {
         data = $('#trackerForm').serializeArray();
@@ -12,9 +23,10 @@ $(function(){
         url: "/trackers/"+data[0].value,
         type: 'DELETE',
         dataType: "json",
-        success: function(data) {
-            $(`#trackerMenu a[data-id='${data}']`).remove();
+        complete: function(data) {
+            $(`#trackerMenu a[data-id='${data.responseJSON.id}']`).remove();
             clearValues();
+            manageButtonState(false);
         }
         });
     });
@@ -33,11 +45,12 @@ $(function(){
         type: 'POST',
         dataType: "json",
         data: $('#trackerForm').serializeArray(),
-        success: function(data) {
+        complete: function(data) {
             $('#trackerMenu span').append(`
-            <p><a class="tracker" data-id="${data.id}" href="#">${data.name}</a></p>
+            <p><a class="tracker" data-id="${data.responseJSON.id}" href="#">${data.responseJSON.name}</a></p>
             `);
-            $(`#trackerMenu a[data-id='${data.id}']`).bind('click', getTrackerDetails);
+            $(`#trackerMenu a[data-id='${data.responseJSON.id}']`).bind('click', getTrackerDetails);
+            manageButtonState(true);
         }
         });
     });
@@ -45,9 +58,7 @@ $(function(){
     // Tracker Menu Management
     $('a.new-tracker').on('click', function() {
         clearValues();
-        $('button#create').show();
-        $('button#update').hide();
-        $('button#delete').hide();
+        manageButtonState(false);
     });
     $('a.tracker').on('click', getTrackerDetails);
 

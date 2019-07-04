@@ -9,7 +9,7 @@ const trackerService = new TrackersService();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   trackerService.findAll().then(trackerResults => {
-    res.render('trackers',
+    return  res.render('trackers',
       { 
           title: 'Tracked Items',
           trackersActive: true, 
@@ -21,27 +21,26 @@ router.get('/', function(req, res, next) {
 
 /* GET: find an individual tracker. */
 router.get('/:id', function(req, res) {
-  trackerService.find(req.params.id)
-                .then(result => res.json(result));
+  return trackerService.find(req.params.id)
+                .then(result => res.status(200).json(result));
 });
 
 /* PUT: update an existing tracker. */
 router.put('/:id', function(req, res) {
-  trackerService.update(req.params.id, req.body)
-                .then(response => {
-                  res.json(response);
-                });
+  return  trackerService.update(req.params.id, req.body)
+                .then(response => res.status(200).json(response));
 });
 
 /* POST: create a new tracker. */
 router.post('/', function(req, res) {
-  trackerService.add(req.body)
-                .then(response => res.json(response));
+  return trackerService.add(req.body)
+                .then(response => res.status(200).json(response));
 });
 
 /* DELETE: an existing tracker. */
 router.delete('/:id', function(req, res) {
-  res.json(trackerService.remove(req.params.id));
+  return  trackerService.remove(req.params.id)
+                .then(response => res.status(200).json(response));
 });
 
 export default router;

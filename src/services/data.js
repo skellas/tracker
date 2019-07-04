@@ -102,7 +102,16 @@ export class ESData {
         return this.esClient.index({
             index: index,
             type: type,
-            body: body
+            body: body,
+            refresh: true
+        });
+    }
+
+    remove(index, type, id) {
+        return this.esClient.delete({
+            index: index,
+            type: type,
+            id: id
         });
     }
 }

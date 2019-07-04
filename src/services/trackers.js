@@ -3,7 +3,6 @@ import { ESData, ESQuery } from './data';
 const queries = new ESQuery();
 export class TrackersService {
     constructor() {
-        this.trackers = [];
         this.loader = new ESData();
     }
 
@@ -40,14 +39,20 @@ export class TrackersService {
     add(tracker) {
         return this.loader.add('trackers', 'tracker', tracker)
                    .then(response => {
-                       return this.composeTracker(response.hits.hits[0]);
-                   }).catch(err => console.log(err));
+                       return this.find(response._id);
+                   }).catch(err => {
+                       console.log(err);
+                   });
     }
 
     remove(id) {
-        console.log('removing by id: ' + id);
-        this.trackers.splice([this.trackers.findIndex(tracker => tracker.id == id)], 1);
-        return id;
+        return this.loader.remove('trackers', 'tracker', id)
+                   .then(response => {
+                       return {id : id};
+                   })
+                   .catch(err => {
+                       return {error: err};
+                    } );
     }
 
     composeTracker(hit) {
