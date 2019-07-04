@@ -13,7 +13,9 @@ export class TrackersService {
                           .then(searchResponse => {
                               console.log(searchResponse.hits.hits);
                               return searchResponse.hits.hits.map((hit)=> hit._source);
-                          });
+                          }).catch(err => {
+                            console.error(err);
+                        });
     }
 
     find(id) {
@@ -21,14 +23,18 @@ export class TrackersService {
         return this.loader.search('trackers', queries.matchById(id))
                           .then(searchResponse => {
                               return searchResponse.hits.hits[0]._source;
-                          });
+                          }).catch(err => {
+                            console.error(err);
+                        });
     }
 
     update(id, updatedTracker) {
-        this.remove(id);
-        console.log(this.trackers);
-        this.add(updatedTracker);
-        return this.find(id);
+        return this.loader.update('trackers', id, "tracker", updatedTracker)
+                          .then(response => {
+                              return response.hits.hits[0]._source;
+                          }).catch(err => {
+                              console.error(err);
+                          });
     }
 
     add(tracker) {

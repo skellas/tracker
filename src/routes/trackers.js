@@ -27,7 +27,10 @@ router.get('/:id', function(req, res) {
 
 /* PUT: update an existing tracker. */
 router.put('/:id', function(req, res) {
-  res.json(trackerService.update(req.params.id, req.body));
+  trackerService.update(req.params.id, req.body)
+                .then(response => {
+                  res.json(response);
+                });
 });
 
 /* POST: create a new tracker. */

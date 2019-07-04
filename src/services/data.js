@@ -87,4 +87,15 @@ export class ESData {
             body: body
         });
     }
+
+    update(index, id, type, body) {
+        return this.esClient.update({
+            index: index,
+            id: id,
+            type: type,
+            body: {
+                doc: body
+            }
+        });
+    }
 }
