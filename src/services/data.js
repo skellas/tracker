@@ -7,10 +7,9 @@ export class ESQuery {
             size: 1,
             from: 0,
             query: {
-                match: {
-                    id: {
-                        query: `${id}`
-                    }
+                ids: {
+                    type: 'tracker',
+                    values: [`${id}`]
                 }
             }
         };
@@ -96,6 +95,14 @@ export class ESData {
             body: {
                 doc: body
             }
+        });
+    }
+
+    add(index, type, body) {
+        return this.esClient.index({
+            index: index,
+            type: type,
+            body: body
         });
     }
 }

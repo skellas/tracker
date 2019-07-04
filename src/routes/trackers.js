@@ -35,7 +35,8 @@ router.put('/:id', function(req, res) {
 
 /* POST: create a new tracker. */
 router.post('/', function(req, res) {
-  res.json(trackerService.add(req.body));
+  trackerService.add(req.body)
+                .then(response => res.json(response));
 });
 
 /* DELETE: an existing tracker. */

@@ -12,7 +12,7 @@ export class TrackersService {
         return this.loader.search('trackers', queries.findAll())
                           .then(searchResponse => {
                               console.log(searchResponse.hits.hits);
-                              return searchResponse.hits.hits.map((hit)=> hit._source);
+                              return searchResponse.hits.hits.map((hit)=> this.composeTracker(hit));
                           }).catch(err => {
                             console.error(err);
                         });
@@ -21,8 +21,8 @@ export class TrackersService {
     find(id) {
         console.log('looking for id: ' + id);
         return this.loader.search('trackers', queries.matchById(id))
-                          .then(searchResponse => {
-                              return searchResponse.hits.hits[0]._source;
+                          .then(response => {
+                            return this.composeTracker(response.hits.hits[0]);
                           }).catch(err => {
                             console.error(err);
                         });
@@ -31,25 +31,28 @@ export class TrackersService {
     update(id, updatedTracker) {
         return this.loader.update('trackers', id, "tracker", updatedTracker)
                           .then(response => {
-                              return response.hits.hits[0]._source;
+                            return this.composeTracker(response.hits.hits[0]);
                           }).catch(err => {
                               console.error(err);
                           });
     }
 
     add(tracker) {
-        if (!tracker.id || tracker.id === '') {
-            tracker.id = this.trackers.length + 1;
-        }
-        console.log("adding ");
-        console.log(tracker);
-        this.trackers.push(tracker);
-        return tracker;
+        return this.loader.add('trackers', 'tracker', tracker)
+                   .then(response => {
+                       return this.composeTracker(response.hits.hits[0]);
+                   }).catch(err => console.log(err));
     }
 
     remove(id) {
         console.log('removing by id: ' + id);
         this.trackers.splice([this.trackers.findIndex(tracker => tracker.id == id)], 1);
         return id;
+    }
+
+    composeTracker(hit) {
+        let tracker = hit._source;
+        tracker.id = hit._id;
+        return tracker;
     }
 }
