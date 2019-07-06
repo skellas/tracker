@@ -1,15 +1,15 @@
-$(function(){
-
     function manageButtonState(trackerSelected) {
         if (trackerSelected) {
             $('button#create').hide();
             $('button#update').show();
             $('button#delete').show();
+            $('button#add-entry').show();
         }
         else {
             $('button#create').show();
             $('button#update').hide();
             $('button#delete').hide();
+            $('button#add-entry').hide();
         }
     }
 
@@ -62,8 +62,6 @@ $(function(){
     });
     $('a.tracker').on('click', getTrackerDetails);
 
-  });
-  
   function getTrackerDetails(event) {event.preventDefault();
     $.ajax({
     url: "/trackers/"+$(this).data('id'),
