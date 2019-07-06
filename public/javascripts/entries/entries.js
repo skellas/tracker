@@ -41,16 +41,23 @@
     });
     
     $('button#entry-create').on('click', function(event) {
-        $.ajax({
-        url: "/entries",
-        type: 'POST',
-        dataType: "json",
-        data: $('#entryForm').serializeArray(),
-        complete: function(data) {
-            getEntries(data.responseJSON.tracker);
-            hideEntryModal();
+        let dateChooser = $('input#entry-date');
+        if (dateChooser.val() != '') {
+            dateChooser.removeClass('is-invalid');
+            $.ajax({
+            url: "/entries",
+            type: 'POST',
+            dataType: "json",
+            data: $('#entryForm').serializeArray(),
+            complete: function(data) {
+                getEntries(data.responseJSON.tracker);
+                hideEntryModal();
+            }
+            });
+        } 
+        else {
+            dateChooser.addClass('is-invalid');
         }
-        });
     });
 
     function getOptionsByWeight(weight) {

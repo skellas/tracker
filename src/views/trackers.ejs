@@ -85,11 +85,13 @@
                       <input type="hidden" id="entry-tracker" name="tracker" value=""/>
                       <div class="form-group">
                         <label for="entry-date" class="col-form-label">Date:</label>
-                        <input type="date" class="form-control" id="entry-date" name="date">
+                        <input type="date" class="form-control" id="entry-date" name="date" required>
+                        <div class="invalid-feedback">Please select a date</div>
                       </div>
                       <div class="form-group">
                         <label for="entry-grade" class="col-form-label">Grade:</label>
-                        <select class="form-control" id="entry-grade" name="grade">
+                        <select class="form-control" id="entry-grade" name="grade" required>
+                        <div class="invalid-feedback">Please choose a grade</div>
                         </select>
                       </div>
                       <div class="form-group">
