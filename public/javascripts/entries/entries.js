@@ -1,5 +1,5 @@
     const fivePointArray = [-2,-1,0,1,2];
-    const threePointArray = [-1,0,-1];
+    const threePointArray = [-1,0,1];
     const tenPointArray = [0,1,2,3,4,5,6,7,8,9,10];
 
     function loadDataTable(data) {
@@ -8,6 +8,10 @@
 
     function hideDataTable() {
         $('#entriesTable').hide();
+    }
+
+    function hideEntryModal() {
+        $('#entryModal').modal('hide');
     }
 
     function getEntries(trackerId) {
@@ -43,7 +47,8 @@
         dataType: "json",
         data: $('#entryForm').serializeArray(),
         complete: function(data) {
-            getEntries(data.responseJSON.trackerId);
+            getEntries(data.responseJSON.tracker);
+            hideEntryModal();
         }
         });
     });

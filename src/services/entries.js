@@ -15,6 +15,24 @@ export class EntriesService {
                         });
     }
 
+    find(id) {
+        return this.loader.search('entries', queries.matchById(id, 'entry'))
+                          .then(response => {
+                            return this.composeEntry(response.hits.hits[0]);
+                          }).catch(err => {
+                            console.error(err);
+                        });
+    }
+
+    add(entry) {
+        return this.loader.add('entries', 'entry', entry)
+                   .then(response => {
+                       return this.find(response._id);
+                   }).catch(err => {
+                       console.log(err);
+                   });
+    }
+
     composeEntry(hit) {
         let entry = hit._source;
         entry.id = hit._id;

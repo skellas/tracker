@@ -12,4 +12,10 @@ router.get('/:trackerId', function(req, res) {
                             .then(response => res.status(200).json(response));
 });
 
+/* POST: create a new entry. */
+router.post('/', function(req, res) {
+  return entriesService.add(req.body)
+                .then(response => res.status(200).json(response));
+});
+
 export default router;

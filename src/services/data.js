@@ -2,13 +2,13 @@ import {Client} from 'elasticsearch';
 
 const maxPageSize = 5;
 export class ESQuery {
-    matchById(id) {
+    matchById(id, type) {
         return {
             size: 1,
             from: 0,
             query: {
                 ids: {
-                    type: 'tracker',
+                    type: type,
                     values: [`${id}`]
                 }
             }

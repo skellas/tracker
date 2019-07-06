@@ -19,7 +19,7 @@ export class TrackersService {
 
     find(id) {
         console.log('looking for id: ' + id);
-        return this.loader.search('trackers', queries.matchById(id))
+        return this.loader.search('trackers', queries.matchById(id, 'tracker'))
                           .then(response => {
                             return this.composeTracker(response.hits.hits[0]);
                           }).catch(err => {
