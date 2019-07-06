@@ -75,6 +75,7 @@
         $('#trackerDescription').val(data.description);
         $('#trackerScale').val(data.scale);
 
+        $('div#entries').collapse('hide');
         getEntries(data.id);
         }
     });
