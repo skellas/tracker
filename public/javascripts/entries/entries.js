@@ -32,7 +32,20 @@
                 selected: option === 0 ? true : false
             }));
         });
-                                       
+        let trackerId = $('input#trackerId').val();
+        $('input#entry-tracker').val(trackerId);
+    });
+    
+    $('button#entry-create').on('click', function(event) {
+        $.ajax({
+        url: "/entries",
+        type: 'POST',
+        dataType: "json",
+        data: $('#entryForm').serializeArray(),
+        complete: function(data) {
+            getEntries(data.responseJSON.trackerId);
+        }
+        });
     });
 
     function getOptionsByWeight(weight) {

@@ -8,8 +8,8 @@ const entriesService = new EntriesService();
 
 /* GET: find entries for a tracker. */
 router.get('/:trackerId', function(req, res) {
-  res.json(entriesService.findEntries(req.params.trackerId));
+  return entriesService.findEntries(req.params.trackerId)
+                            .then(response => res.status(200).json(response));
 });
-
 
 export default router;

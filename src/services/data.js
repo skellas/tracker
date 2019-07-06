@@ -14,6 +14,18 @@ export class ESQuery {
             }
         };
     }
+
+    matchByTrackerId(trackerId, size=10, page=0) {
+        return {
+            size: size,
+            from: (size * page),
+            query: {
+                match: {
+                    tracker: trackerId
+                }
+            }
+        };
+    }
     
     findAll() {
         return {

@@ -1,21 +1,23 @@
-import fs from 'fs';
-import path from 'path';
+import { ESData, ESQuery } from './data';
 
+const queries = new ESQuery();
 export class EntriesService {
     constructor() {
-        this.entries = new Map();
+        this.loader = new ESData();
     }
 
     findEntries(trackerId) {
-        if (!this.entries.has(trackerId)){
-            this.loadEntries(trackerId);
-        }
-        console.log(this.entries);
-        return this.entries.get(trackerId);
+        return this.loader.search('entries', queries.matchByTrackerId(trackerId))
+                          .then(searchResponse => {
+                            return searchResponse.hits.hits.map((hit)=> this.composeEntry(hit));
+                          }).catch(err => {
+                            console.error(err);
+                        });
     }
 
-    loadEntries(trackerId) {
-        let data = fs.readFileSync(path.join(__dirname, `../../data/entries-${trackerId}.json`)).toString();
-        this.entries.set(trackerId, JSON.parse(data));
+    composeEntry(hit) {
+        let entry = hit._source;
+        entry.id = hit._id;
+        return entry;
     }
 }

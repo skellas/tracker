@@ -80,9 +80,10 @@
                   </div>
                   <div class="modal-body">
                     <form id="entryForm">
+                      <input type="hidden" id="trackerId" name="tracker" value=""/>
                       <div class="form-group">
                         <label for="entry-date" class="col-form-label">Date:</label>
-                        <input type="date" class="form-control" id="entry-date">
+                        <input type="date" class="form-control" id="entry-date" name="date">
                       </div>
                       <div class="form-group">
                         <label for="entry-grade" class="col-form-label">Grade:</label>
@@ -91,13 +92,13 @@
                       </div>
                       <div class="form-group">
                         <label for="entry-note" class="col-form-label">Note:</label>
-                        <textarea class="form-control" id="entry-note"></textarea>
+                        <textarea class="form-control" id="entry-note" name="note"></textarea>
                       </div>
                     </form>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Send message</button>
+                    <button type="button" class="btn btn-primary" id="entry-create">Send message</button>
                   </div>
                 </div>
               </div>
