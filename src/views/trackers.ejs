@@ -52,14 +52,16 @@
             <button id="create" type="button" class="btn btn-primary">Create</button>
             <button id="update" type="button" class="btn btn-primary" style="display: none">Update</button>
             <button id="delete" type="button" class="btn btn-secondary" style="display: none">Delete</button>
+            <button id="viewEntries" type="button" class="btn btn-light float-right" data-toggle="collapse"
+              data-target="#entries" aria-expanded="false" aria-controls="entries" 
+              style="display: none">View Entries</button>
           </form>
         </div>
-        <div id="entries">
+        <div id="entries" class="collapse">
           <span>&nbsp;</span>
           <table id="entriesTable" data-toggle="table" style="display: none">
             <thead>
               <tr>
-                <th data-field="id">ID</th>
                 <th data-field="date">Entry Date</th>
                 <th data-field="note">Note</th>
                 <th data-field="grade">Grade</th>

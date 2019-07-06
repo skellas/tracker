@@ -4,12 +4,14 @@
             $('button#update').show();
             $('button#delete').show();
             $('button#add-entry').show();
+            $('button#viewEntries').show();
         }
         else {
             $('button#create').show();
             $('button#update').hide();
             $('button#delete').hide();
             $('button#add-entry').hide();
+            $('button#viewEntries').hide();
         }
     }
 
